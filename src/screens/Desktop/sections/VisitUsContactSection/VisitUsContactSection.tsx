@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { MapPin, Phone, Instagram, Facebook, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Instagram, Facebook, ExternalLink, Clock } from "lucide-react";
 
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,7 +22,7 @@ function useReveal() {
   return ref;
 }
 
-const MAPS_URL = "https://maps.app.goo.gl/ttB4cwXSYkZTHdgB8";
+const MAPS_URL = "https://www.google.com/maps/place/140+Rogers+Rd+A,+York,+ON+M6E+1P7";
 
 export const VisitUsContactSection = (): JSX.Element => {
   const ref = useReveal();
@@ -36,117 +36,143 @@ export const VisitUsContactSection = (): JSX.Element => {
         ref={ref}
         className="w-full px-6 py-12 sm:px-8 md:px-12 lg:px-[101px] lg:py-14"
       >
-        <div className="flex min-h-[140px] w-full flex-col justify-between gap-10 md:flex-row md:items-start">
-          {/* Left - Visit info */}
-          <address className="not-italic">
-            <div className="flex max-w-[380px] flex-col items-start gap-5">
-              <div className="flex items-center gap-2">
-                <span className="h-0.5 w-6 rounded-full bg-[#6B3A2A]" />
-                <span className="font-sans text-xs font-semibold uppercase tracking-widest text-[#6B3A2A]">
-                  Find Us
-                </span>
-              </div>
-              <h2 className="font-serif text-[36px] font-bold leading-tight text-black">
-                Visit Us
-              </h2>
+        {/* Top Headings */}
+        <div className="mb-12 flex flex-col items-center text-center">
+          <div className="mb-4 flex items-center gap-2">
+            <span className="h-0.5 w-6 rounded-full bg-[#6B3A2A]" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-[#6B3A2A]">
+              Visit Us
+            </span>
+            <span className="h-0.5 w-6 rounded-full bg-[#6B3A2A]" />
+          </div>
+          <h2 className="mb-4 font-serif text-[36px] font-bold leading-tight text-black md:text-[48px]">
+            Visit Our Amare Pastry Shop
+          </h2>
+          <p className="max-w-2xl font-sans text-base text-gray-600">
+            Come experience Toronto's finest handcrafted pastries and cakes — 140 Rogers Rd A
+          </p>
+        </div>
 
-              <div className="flex flex-col gap-4">
+        {/* Two Column Layout */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          
+          {/* Left Column - Info Card */}
+          <div className="flex flex-col gap-8 rounded-[24px] border border-[#6B3A2A]/10 bg-white p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:p-10">
+            
+            {/* Address */}
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#6B3A2A]/5 text-[#6B3A2A]">
+                <MapPin className="h-5 w-5" />
+              </div>
+              <div className="flex flex-col">
+                <span className="mb-1 font-sans text-xs font-bold uppercase tracking-widest text-gray-400">
+                  Address
+                </span>
                 <a
                   href={MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-start gap-3 font-sans text-base text-gray-700 hover:text-[#6B3A2A] transition-colors duration-200"
+                  className="font-sans text-base font-medium text-gray-800 transition-colors hover:text-[#6B3A2A]"
                 >
-                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#6B3A2A]" />
-                  <span className="group-hover:underline">
-                    Amare Pastry Co., Toronto, ON
-                  </span>
-                </a>
-                <a
-                  href="tel:+14162223456"
-                  className="flex items-center gap-3 font-sans text-base text-gray-700 hover:text-[#6B3A2A] transition-colors duration-200"
-                >
-                  <Phone className="h-5 w-5 shrink-0 text-[#6B3A2A]" />
-                  <span>(416) 222-3456</span>
+                  140 Rogers Rd A, York, ON M6E 1P7
                 </a>
               </div>
-
-              <a
-                href={MAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-1 flex items-center gap-2 rounded-[50px] bg-[#6B3A2A] px-6 py-3 font-sans text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-[#8B5A3A] hover:scale-[1.04] hover:shadow-lg active:scale-[0.98]"
-              >
-                <ExternalLink className="h-4 w-4" />
-                Get Directions
-              </a>
             </div>
-          </address>
 
-          {/* Center - Hours */}
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <span className="h-0.5 w-6 rounded-full bg-[#6B3A2A]" />
-              <span className="font-sans text-xs font-semibold uppercase tracking-widest text-[#6B3A2A]">
-                Hours
-              </span>
+            {/* Phone */}
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#6B3A2A]/5 text-[#6B3A2A]">
+                <Phone className="h-5 w-5" />
+              </div>
+              <div className="flex flex-col">
+                <span className="mb-1 font-sans text-xs font-bold uppercase tracking-widest text-gray-400">
+                  Phone
+                </span>
+                <a
+                  href="tel:+14165871210"
+                  className="font-sans text-base font-medium text-gray-800 transition-colors hover:text-[#6B3A2A]"
+                >
+                  (416) 587-1210
+                </a>
+              </div>
             </div>
-            <h3 className="font-serif text-[22px] font-bold text-black">
-              Opening Hours
-            </h3>
-            <div className="flex flex-col gap-2 font-sans text-sm text-gray-700">
-              {[
-                { day: "Monday – Friday", hours: "10:00 AM – 8:00 PM" },
-                { day: "Saturday", hours: "9:00 AM – 9:00 PM" },
-                { day: "Sunday", hours: "10:00 AM – 6:00 PM" },
-              ].map(({ day, hours }) => (
-                <div key={day} className="flex justify-between gap-6">
-                  <span className="font-medium text-gray-800">{day}</span>
-                  <span className="font-semibold text-[#6B3A2A]">{hours}</span>
+
+            {/* Hours */}
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#6B3A2A]/5 text-[#6B3A2A]">
+                <Clock className="h-5 w-5" />
+              </div>
+              <div className="flex w-full flex-col">
+                <span className="mb-2 font-sans text-xs font-bold uppercase tracking-widest text-gray-400">
+                  Hours
+                </span>
+                <div className="flex w-full max-w-[280px] flex-col gap-2 font-sans text-sm text-gray-800">
+                  {[
+                    { day: "Monday – Friday", hours: "10:00 AM – 8:00 PM" },
+                    { day: "Saturday", hours: "9:00 AM – 9:00 PM" },
+                    { day: "Sunday", hours: "10:00 AM – 6:00 PM" },
+                  ].map(({ day, hours }) => (
+                    <div key={day} className="flex justify-between gap-4">
+                      <span className="font-medium text-gray-600">{day}</span>
+                      <span className="font-semibold text-[#6B3A2A]">{hours}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
+
+            {/* Socials */}
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#6B3A2A]/5 text-[#6B3A2A]">
+                <Instagram className="h-5 w-5" />
+              </div>
+              <div className="flex flex-col">
+                <span className="mb-2 font-sans text-xs font-bold uppercase tracking-widest text-gray-400">
+                  Connect
+                </span>
+                <div className="flex flex-col gap-3">
+                  <a
+                    href="https://www.instagram.com/amarepastrycorp/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 font-sans text-base font-medium text-gray-800 transition-colors hover:text-[#6B3A2A]"
+                  >
+                    <Instagram className="h-4 w-4 text-[#6B3A2A]" />
+                    <span>@amarepastrycorp</span>
+                  </a>
+                  <a
+                    href="https://www.facebook.com/amarepastryco"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 font-sans text-base font-medium text-gray-800 transition-colors hover:text-[#6B3A2A]"
+                  >
+                    <Facebook className="h-4 w-4 text-[#6B3A2A]" />
+                    <span>Amare Pastry Co</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          {/* Right - Social */}
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-2">
-              <span className="h-0.5 w-6 rounded-full bg-[#6B3A2A]" />
-              <span className="font-sans text-xs font-semibold uppercase tracking-widest text-[#6B3A2A]">
-                Connect
-              </span>
-            </div>
-            <h3 className="font-serif text-[22px] font-bold text-black">
-              Follow Us
-            </h3>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://www.instagram.com/amarepastry.co"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#6B3A2A]/30 text-[#6B3A2A] transition-all duration-200 hover:border-[#6B3A2A] hover:bg-[#6B3A2A] hover:text-white hover:scale-110 active:scale-95"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a
-                href="https://www.facebook.com/amarepastryco"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#6B3A2A]/30 text-[#6B3A2A] transition-all duration-200 hover:border-[#6B3A2A] hover:bg-[#6B3A2A] hover:text-white hover:scale-110 active:scale-95"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-            </div>
-            <p className="font-sans text-sm text-gray-500">@amarepastry.co</p>
+          {/* Right Column - Map */}
+          <div className="h-full min-h-[400px] w-full overflow-hidden rounded-[24px] border border-[#6B3A2A]/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2885.2434945647924!2d-79.44998489999999!3d43.684701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b33c0545c86e9%3A0x6c0a4a5cd7a4dd1!2sAmar%C3%A9%20Pastry%20Corp!5e0!3m2!1sen!2sca!4v1779264943396!5m2!1sen!2sca" 
+              className="h-full min-h-[400px] w-full grayscale-[15%] transition-all duration-500 hover:grayscale-0"
+              style={{ border: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Amare Pastry Corp Location"
+            ></iframe>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-[#6B3A2A]/10 pt-6 sm:flex-row">
           <img
-            src="/amarepastriespnglogo.png"
+            src="/amare-new-logo.png"
             alt="Amare Pastry Co."
             className="h-10 w-auto object-contain"
           />

@@ -30,22 +30,64 @@ function useReveal(direction: "up" | "left" | "right" = "up") {
 
 const feedbackItems = [
   {
-    quote:
-      '"Every bite of the Lotus Biscoff cup was absolutely perfect. The layers were so creamy and the flavour was incredible. Amare never disappoints!"',
-    author: "Sofia R.",
-    role: "Regular Customer",
+    quote: '"Best 3 leches cake 🎂 👌 …"',
+    author: "Jocelyn Beltran",
+    role: "Google Review",
   },
   {
-    quote:
-      '"I ordered a custom dessert box for my sister\'s birthday and everyone was blown away. The presentation was stunning and the taste was even better."',
-    author: "Marcus T.",
-    role: "Event Client",
+    quote: '"I ordered a last minute cake from Amare and not only did Tanya accommodate my requests, the cake was so delicious! Will definitely be ordering again"',
+    author: "Stephanie Botero",
+    role: "Google Review",
   },
   {
-    quote:
-      '"The Oreo cookies and cream cup is my go-to. I drive 30 minutes just to get one. Worth it every single time. Truly crafted with love."',
-    author: "Priya K.",
-    role: "Loyal Fan",
+    quote: '"Pretty delicious, pretty good, pretty tasty. A mans like me might slide back for another round ya feel me? 10/10 Would recommend."',
+    author: "James Sanchez",
+    role: "Google Review",
+  },
+  {
+    quote: '"Delicious treats! These people are genuine and cater to you as best as they can! They are accommodating and make appropriate substitutions based on allergies and dietary restrictions. Quality!!!! Absolutely a returning customer!"',
+    author: "Mariecef Cubos",
+    role: "Google Review",
+  },
+  {
+    quote: '"Delicious and wonderful customer service!"',
+    author: "Grace Pham",
+    role: "Google Review",
+  },
+  {
+    quote: '"Amazing customer service and delicious desserts! So excited to have them for my sons birthday party 🥳 …"',
+    author: "Jenn Eaton",
+    role: "Google Review",
+  },
+  {
+    quote: '"Amazing customer service and delicious!!!"',
+    author: "Kim Goldshtein",
+    role: "Google Review",
+  },
+  {
+    quote: '"I’d definitely suggest giving it a try!"',
+    author: "Arzu Y",
+    role: "Google Review",
+  },
+  {
+    quote: '"I tried the Tres Leches cake from Amare Pastry, and it was honestly the best I’ve ever had!I’ll never forget its taste .Super soft, perfectly soaked, and full of flavor. I’ve tried it from other places, but nothing compares to this one. Highly recommend!❤️❤️❤️"',
+    author: "amitha amitha b",
+    role: "Google Review",
+  },
+  {
+    quote: '"When I say Amare has some of the best desserts I really mean it. The cookies and cream flavour is my go to and it always leaves me wanting more. Everything is made with care and attention to detail and you can taste it in every bite. If you’re looking to satisfy your sweet tooth, this is the spot I’ll always recommend"',
+    author: "Anthony Cadena",
+    role: "Google Review",
+  },
+  {
+    quote: '"Amare Tres Leches has some of the most delicious pastries and cupcakes I’ve tried. Everything is fresh, flavourful, and beautifully made. Definitely the kind of treats you keep thinking about after the first bite. Highly recommend for anyone with a sweet tooth!"',
+    author: "Nancy Cadena",
+    role: "Google Review",
+  },
+  {
+    quote: '"This place is a hidden gem , the desserts are so delicious and moist ! Would highly recommend it !"',
+    author: "Martha Amponsah",
+    role: "Google Review",
   },
 ];
 

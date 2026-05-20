@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const navigationItems = [
   { label: "About Us", href: "#about-us" },
-  { label: "Products", href: "/menu", isRoute: true },
+  { label: "Menu", href: "/menu", isRoute: true },
   { label: "Special Orders", href: "#special-orders" },
   { label: "Contact", href: "#contact" },
 ];
@@ -46,7 +46,7 @@ export const HeroIntroSection = (): JSX.Element => {
           <img
             className="h-[56px] w-auto object-contain"
             alt="Amare Pastry Co. logo"
-            src="/amarepastriespnglogo.png"
+            src="/amare-new-logo.png"
           />
         </Link>
 
