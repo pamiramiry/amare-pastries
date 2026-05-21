@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { SiteHeader, type NavItem } from "../../components/SiteHeader";
 
 type MenuItem = {
   id: string;
@@ -284,9 +285,15 @@ function useStaggerReveal(deps: unknown[]) {
   return ref;
 }
 
+const menuNavItems: NavItem[] = [
+  { label: "Home", href: "/" },
+  { label: "Menu", href: "/menu", isRoute: true },
+  { label: "Special Orders", href: "/special-orders", isRoute: true },
+  { label: "Contact", href: "/#contact" },
+];
+
 export const MenuPage = (): JSX.Element => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
-  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const filtered =
@@ -296,74 +303,9 @@ export const MenuPage = (): JSX.Element => {
 
   const cardsRef = useStaggerReveal([filtered]);
 
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "Special Orders", href: "/#special-orders" },
-    { label: "Contact", href: "/#contact" },
-  ];
-
   return (
     <div className="min-h-screen bg-[#fffafa]">
-      {/* Navbar */}
-      <header className="sticky top-0 z-50 w-full border-b-2 border-[#6B3A2A]/10 bg-white/95 shadow-sm backdrop-blur-sm">
-        <div className="mx-auto flex min-h-[72px] w-full max-w-screen-2xl items-center justify-between px-6 py-3 sm:px-10 lg:px-[52px]">
-          <Link to="/" className="flex items-center shrink-0">
-            <img
-              className="h-[52px] w-auto object-contain"
-              alt="Amare Pastry Co. logo"
-              src="/amare-new-logo.png"
-            />
-          </Link>
-
-          <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                to={item.href}
-                className="nav-link-hover font-sans text-base font-medium tracking-wide text-gray-800 hover:text-[#6B3A2A] transition-colors duration-200"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <button
-              type="button"
-              onClick={() => navigate("/#special-orders")}
-              className="rounded-[50px] bg-[#cc4156] px-6 py-2.5 font-sans text-sm font-bold text-white shadow transition-all duration-200 hover:scale-[1.04] hover:shadow-md active:scale-[0.98]"
-            >
-              Order Ahead
-            </button>
-          </nav>
-
-          {/* Mobile hamburger */}
-          <button
-            type="button"
-            aria-label="Toggle menu"
-            onClick={() => setMenuOpen((o) => !o)}
-            className="flex md:hidden flex-col justify-center items-center w-10 h-10 gap-[5px] bg-transparent border-0 cursor-pointer p-0"
-          >
-            <span className={`block h-0.5 w-6 bg-[#6B3A2A] transition-all duration-300 origin-center ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-            <span className={`block h-0.5 w-6 bg-[#6B3A2A] transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-0.5 w-6 bg-[#6B3A2A] transition-all duration-300 origin-center ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
-          </button>
-        </div>
-
-        {/* Mobile dropdown */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"} bg-white border-t border-[#6B3A2A]/10`}>
-          <ul className="flex flex-col px-6 py-4 gap-4">
-            {navItems.map((item) => (
-              <li key={item.label}>
-                <Link
-                  to={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="font-sans text-base font-medium text-gray-800 hover:text-[#6B3A2A] transition-colors duration-200"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </header>
+      <SiteHeader navItems={menuNavItems} />
 
       {/* Page hero banner */}
       <div className="w-full bg-[#ffccd380] px-6 py-12 sm:px-10 lg:px-[52px]">
@@ -436,17 +378,7 @@ export const MenuPage = (): JSX.Element => {
             <article
               key={item.id}
               className="group flex flex-col overflow-hidden rounded-[24px] bg-white shadow-md transition-all duration-250 hover:-translate-y-[5px] hover:shadow-xl cursor-pointer"
-              onClick={() => {
-                const el = document.getElementById("special-orders");
-                if (el) {
-                  navigate("/");
-                  setTimeout(() => {
-                    document.getElementById("special-orders")?.scrollIntoView({ behavior: "smooth" });
-                  }, 200);
-                } else {
-                  navigate("/#special-orders");
-                }
-              }}
+              onClick={() => navigate("/special-orders")}
             >
               <div className="overflow-hidden">
                 <img
@@ -519,7 +451,7 @@ export const MenuPage = (): JSX.Element => {
       <footer className="w-full border-t-2 border-[#6B3A2A]/10 bg-[#fffafa] px-6 py-8 sm:px-10">
         <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-3 sm:flex-row">
           <img
-            src="/amare-new-logo.png"
+            src="/amare-logo.png"
             alt="Amare Pastry Co."
             className="h-10 w-auto object-contain"
           />

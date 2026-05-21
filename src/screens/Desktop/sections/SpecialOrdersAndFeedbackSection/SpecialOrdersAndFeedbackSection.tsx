@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function useReveal(direction: "up" | "left" | "right" = "up") {
@@ -154,16 +155,12 @@ export const SpecialOrdersAndFeedbackSection = (): JSX.Element => {
                 </li>
               ))}
             </ul>
-            <button
-              type="button"
-              onClick={() => {
-                const el = document.getElementById("contact");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="mt-10 h-auto min-w-[260px] rounded-[50px] bg-[#9bcca3] px-[50px] py-[22px] font-sans text-[22px] font-bold text-white shadow-md transition-all duration-200 hover:bg-[#7aac84] hover:scale-[1.04] hover:shadow-lg active:scale-[0.98]"
+            <Link
+              to="/special-orders"
+              className="mt-10 inline-flex h-auto min-w-[260px] items-center justify-center rounded-[50px] bg-[#cc4156] px-[50px] py-[22px] font-sans text-[22px] font-bold text-white shadow-md transition-all duration-200 hover:scale-[1.04] hover:shadow-lg active:scale-[0.98]"
             >
               Place An Order
-            </button>
+            </Link>
           </div>
 
           <div
@@ -181,7 +178,7 @@ export const SpecialOrdersAndFeedbackSection = (): JSX.Element => {
         </section>
 
         {/* Customer Feedback */}
-        <section ref={feedbackRef} className="mt-20 pb-4">
+        <section id="reviews" ref={feedbackRef} className="mt-20 pb-4">
           <div className="mb-4 flex items-center justify-center gap-2">
             <span className="h-0.5 w-8 rounded-full bg-[#6B3A2A]" />
             <span className="font-sans text-sm font-semibold uppercase tracking-widest text-[#6B3A2A]">

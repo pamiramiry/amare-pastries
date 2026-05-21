@@ -172,7 +172,7 @@ export const VisitUsContactSection = (): JSX.Element => {
         {/* Bottom bar */}
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-[#6B3A2A]/10 pt-6 sm:flex-row">
           <img
-            src="/amare-new-logo.png"
+            src="/amare-logo.png"
             alt="Amare Pastry Co."
             className="h-10 w-auto object-contain"
           />
