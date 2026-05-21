@@ -1,7 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { SiteHeader, type NavItem } from "../../components/SiteHeader";
+import { SiteHeader } from "../../components/SiteHeader";
+import { UberEatsLink } from "../../components/UberEatsLink";
+import { JsonLdScript } from "../../components/JsonLd";
+import { breadcrumbJsonLd, menuItemListJsonLd, webSiteJsonLd } from "../../config/seo";
 
 type MenuItem = {
   id: string;
@@ -285,13 +288,6 @@ function useStaggerReveal(deps: unknown[]) {
   return ref;
 }
 
-const menuNavItems: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Menu", href: "/menu", isRoute: true },
-  { label: "Special Orders", href: "/special-orders", isRoute: true },
-  { label: "Contact", href: "/#contact" },
-];
-
 export const MenuPage = (): JSX.Element => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const navigate = useNavigate();
@@ -302,13 +298,25 @@ export const MenuPage = (): JSX.Element => {
       : MENU_ITEMS.filter((i) => i.category === activeCategory);
 
   const cardsRef = useStaggerReveal([filtered]);
+  const menuJsonLd = useMemo(
+    () => [
+      webSiteJsonLd(),
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Menu", path: "/menu" },
+      ]),
+      menuItemListJsonLd(MENU_ITEMS),
+    ],
+    [],
+  );
 
   return (
     <div className="min-h-screen bg-[#fffafa]">
-      <SiteHeader navItems={menuNavItems} />
+      <JsonLdScript id="amare-menu-json-ld" data={menuJsonLd} />
+      <SiteHeader />
 
       {/* Page hero banner */}
-      <div className="w-full bg-[#ffccd380] px-6 py-12 sm:px-10 lg:px-[52px]">
+      <div className="w-full bg-[#ffccd3] px-6 py-12 sm:px-10 lg:px-[52px]">
         <div className="mx-auto max-w-[1280px]">
           <Link
             to="/"
@@ -323,18 +331,28 @@ export const MenuPage = (): JSX.Element => {
               Our Menu
             </span>
           </div>
-          <h1 className="mt-2 font-serif text-[42px] font-bold leading-tight text-[#cc4156] sm:text-[52px]">
+          <h1 className="mt-2 font-serif text-[42px] font-bold leading-tight text-brand-pink sm:text-[52px]">
             Everything We Make
           </h1>
-          <p className="mt-3 max-w-lg font-sans text-base text-gray-600">
-            Fresh, handcrafted desserts made with love in Toronto. Browse our
-            full selection below.
+          <p className="mt-3 max-w-2xl font-sans text-base text-gray-600">
+            Fresh, handcrafted desserts made with love in Toronto. Browse below
+            for our full menu. Order delivery on Uber Eats or submit a pickup
+            order online.
           </p>
+          <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+            <UberEatsLink variant="menu" className="w-full sm:w-auto" />
+            <Link
+              to="/special-orders"
+              className="inline-flex w-full items-center justify-center rounded-[50px] border-2 border-[#6B3A2A] px-8 py-3.5 font-sans text-base font-bold text-[#6B3A2A] transition-all duration-200 hover:bg-[#6B3A2A] hover:text-white hover:scale-[1.04] active:scale-[0.98] sm:w-auto sm:text-lg"
+            >
+              Order Ahead for Pickup
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Wave from pink to white */}
-      <div className="w-full overflow-hidden leading-[0] bg-[#ffccd380]">
+      <div className="w-full overflow-hidden leading-[0] bg-[#ffccd3]">
         <svg
           viewBox="0 0 1440 50"
           xmlns="http://www.w3.org/2000/svg"
@@ -383,7 +401,7 @@ export const MenuPage = (): JSX.Element => {
               <div className="overflow-hidden">
                 <img
                   src={item.image_url}
-                  alt={item.name}
+                  alt={`${item.name} — ${item.category} at Amare Pastry Co., Toronto`}
                   className="h-[200px] w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.06]"
                   loading="lazy"
                 />
@@ -398,14 +416,9 @@ export const MenuPage = (): JSX.Element => {
                 <p className="flex-1 font-sans text-xs leading-relaxed text-gray-500 line-clamp-2">
                   {item.description}
                 </p>
-                <div className="mt-2 flex items-center justify-between">
-                  <span className="font-serif text-[18px] font-bold text-[#6B3A2A]">
-                    ${item.price.toFixed(2)}
-                  </span>
-                  <span className="rounded-full bg-[#cc4156]/10 px-3 py-1 font-sans text-xs font-semibold text-[#cc4156]">
-                    Order
-                  </span>
-                </div>
+                <p className="mt-2 font-serif text-[18px] font-bold text-[#6B3A2A]">
+                  ${item.price.toFixed(2)}
+                </p>
               </div>
             </article>
           ))}
@@ -418,7 +431,7 @@ export const MenuPage = (): JSX.Element => {
         )}
 
         {/* CTA banner */}
-        <div className="mt-16 flex flex-col items-center gap-4 rounded-[28px] bg-[#ffccd380] px-8 py-12 text-center">
+        <div className="mt-16 flex flex-col items-center gap-4 rounded-[28px] bg-[#ffccd3] px-8 py-12 text-center">
           <div className="flex items-center gap-2">
             <span className="h-0.5 w-8 rounded-full bg-[#6B3A2A]" />
             <span className="font-sans text-xs font-semibold uppercase tracking-widest text-[#6B3A2A]">
@@ -426,7 +439,7 @@ export const MenuPage = (): JSX.Element => {
             </span>
             <span className="h-0.5 w-8 rounded-full bg-[#6B3A2A]" />
           </div>
-          <h2 className="font-serif text-[28px] font-bold text-[#cc4156] sm:text-[34px]">
+          <h2 className="font-serif text-[28px] font-bold text-brand-pink sm:text-[34px]">
             Want Something Special?
           </h2>
           <p className="max-w-md font-sans text-base text-gray-600">

@@ -1,33 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-function useReveal(direction: "up" | "left" | "right" = "up") {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const cls =
-      direction === "left"
-        ? "reveal-left"
-        : direction === "right"
-          ? "reveal-right"
-          : "reveal";
-    el.classList.add(cls);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("revealed");
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [direction]);
-  return ref;
-}
+import { useReveal } from "../../../../hooks/useReveal";
 
 const feedbackItems = [
   {
@@ -116,7 +90,7 @@ export const SpecialOrdersAndFeedbackSection = (): JSX.Element => {
   return (
     <section
       id="special-orders"
-      className="relative w-full overflow-hidden bg-[#ffccd380]"
+      className="relative w-full overflow-hidden bg-[#ffccd3]"
     >
       <div className="mx-auto flex w-full max-w-[1440px] flex-col px-6 pb-16 pt-8 sm:px-10 lg:px-14">
         {/* Special Orders */}
@@ -131,7 +105,7 @@ export const SpecialOrdersAndFeedbackSection = (): JSX.Element => {
                 Made Just For You
               </span>
             </div>
-            <h2 className="font-serif text-[36px] font-bold leading-[1.1] text-[#cc4156] lg:text-[42px]">
+            <h2 className="font-serif text-[36px] font-bold leading-[1.1] text-brand-pink lg:text-[42px]">
               Special Orders
             </h2>
             <p className="mt-6 max-w-[535px] font-sans text-base font-normal leading-relaxed text-gray-700 lg:text-lg">
@@ -157,7 +131,7 @@ export const SpecialOrdersAndFeedbackSection = (): JSX.Element => {
             </ul>
             <Link
               to="/special-orders"
-              className="mt-10 inline-flex h-auto min-w-[260px] items-center justify-center rounded-[50px] bg-[#cc4156] px-[50px] py-[22px] font-sans text-[22px] font-bold text-white shadow-md transition-all duration-200 hover:scale-[1.04] hover:shadow-lg active:scale-[0.98]"
+              className="btn-cta mt-10 inline-flex h-auto min-w-[260px] items-center justify-center px-[50px] py-[22px] text-[22px] shadow-md hover:shadow-lg"
             >
               Place An Order
             </Link>
@@ -186,7 +160,7 @@ export const SpecialOrdersAndFeedbackSection = (): JSX.Element => {
             </span>
             <span className="h-0.5 w-8 rounded-full bg-[#6B3A2A]" />
           </div>
-          <h2 className="text-center font-serif text-[36px] font-bold leading-tight text-[#cc4156] lg:text-[40px]">
+          <h2 className="text-center font-serif text-[36px] font-bold leading-tight text-brand-pink lg:text-[40px]">
             What Our Customers Say
           </h2>
 

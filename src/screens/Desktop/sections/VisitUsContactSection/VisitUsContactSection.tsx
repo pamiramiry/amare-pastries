@@ -1,26 +1,6 @@
-import { useEffect, useRef } from "react";
-import { MapPin, Phone, Instagram, Facebook, ExternalLink, Clock } from "lucide-react";
-
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.classList.add("reveal");
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("revealed");
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
+import { MapPin, Phone, Instagram, Facebook, Clock, ShoppingBag } from "lucide-react";
+import { UberEatsLink } from "../../../../components/UberEatsLink";
+import { useReveal } from "../../../../hooks/useReveal";
 
 const MAPS_URL = "https://www.google.com/maps/place/140+Rogers+Rd+A,+York,+ON+M6E+1P7";
 
@@ -68,14 +48,16 @@ export const VisitUsContactSection = (): JSX.Element => {
                 <span className="mb-1 font-sans text-xs font-bold uppercase tracking-widest text-gray-400">
                   Address
                 </span>
-                <a
-                  href={MAPS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-sans text-base font-medium text-gray-800 transition-colors hover:text-[#6B3A2A]"
-                >
-                  140 Rogers Rd A, York, ON M6E 1P7
-                </a>
+                <address className="not-italic">
+                  <a
+                    href={MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-sans text-base font-medium text-gray-800 transition-colors hover:text-[#6B3A2A]"
+                  >
+                    140 Rogers Rd A, York, ON M6E 1P7
+                  </a>
+                </address>
               </div>
             </div>
 
@@ -108,9 +90,9 @@ export const VisitUsContactSection = (): JSX.Element => {
                 </span>
                 <div className="flex w-full max-w-[280px] flex-col gap-2 font-sans text-sm text-gray-800">
                   {[
-                    { day: "Monday – Friday", hours: "10:00 AM – 8:00 PM" },
-                    { day: "Saturday", hours: "9:00 AM – 9:00 PM" },
-                    { day: "Sunday", hours: "10:00 AM – 6:00 PM" },
+                    { day: "Monday – Friday", hours: "10:00 AM – 7:00 PM" },
+                    { day: "Saturday", hours: "9:00 AM – 7:00 PM" },
+                    { day: "Sunday", hours: "10:00 AM – 7:00 PM" },
                   ].map(({ day, hours }) => (
                     <div key={day} className="flex justify-between gap-4">
                       <span className="font-medium text-gray-600">{day}</span>
@@ -118,6 +100,22 @@ export const VisitUsContactSection = (): JSX.Element => {
                     </div>
                   ))}
                 </div>
+              </div>
+            </div>
+
+            {/* Delivery */}
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#6B3A2A]/5 text-[#6B3A2A]">
+                <ShoppingBag className="h-5 w-5" />
+              </div>
+              <div className="flex flex-col gap-3">
+                <span className="font-sans text-xs font-bold uppercase tracking-widest text-gray-400">
+                  Delivery
+                </span>
+                <p className="font-sans text-sm text-gray-600">
+                  Order for delivery through Uber Eats.
+                </p>
+                <UberEatsLink variant="menu" className="!inline-flex !w-fit !px-6 !py-2.5 !text-base" />
               </div>
             </div>
 

@@ -1,0 +1,7 @@
+# Local dev: search engines do not index localhost — this file matters once you deploy.
+User-agent: *
+Allow: /
+Disallow: /special-orders/confirmation
+
+# When you have a live domain, add (and update public/sitemap.xml):
+# Sitemap: https://your-domain.com/sitemap.xml

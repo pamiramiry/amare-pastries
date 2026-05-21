@@ -2,23 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronDown, Clock, MapPin, Star } from "lucide-react";
 import { HeroCarousel } from "../../../../components/HeroCarousel";
+import { UberEatsLink } from "../../../../components/UberEatsLink";
 import { heroSlides } from "../../../../config/heroSlides";
-
-function useReveal(direction: "up" | "left" | "right" = "up") {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const cls = direction === "left" ? "reveal-left" : direction === "right" ? "reveal-right" : "reveal";
-    el.classList.add(cls);
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { el.classList.add("revealed"); observer.unobserve(el); }
-    }, { threshold: 0.05 });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [direction]);
-  return ref;
-}
+import { useReveal } from "../../../../hooks/useReveal";
 
 const bestSellers = [
   { image: "/amare-cups.webp", title: "Signature Cup Trio", price: "From $12.99" },
@@ -36,7 +22,7 @@ const HERO_WAVE = (
 export const BestSellerShowcaseSection = (): JSX.Element => {
   const navigate = useNavigate();
   const [activeSlide, setActiveSlide] = useState(0);
-  const contentRef = useReveal("up");
+  const contentRef = useReveal("up", 0.05);
   const cardsRef = useRef<HTMLDivElement>(null);
   const currentSlide = heroSlides[activeSlide];
 
@@ -61,36 +47,42 @@ export const BestSellerShowcaseSection = (): JSX.Element => {
 
   return (
     <section className="w-full">
-      <div id="about-us" className="relative min-h-screen w-full overflow-hidden bg-[#1a1210]">
+      <div className="relative min-h-screen w-full overflow-hidden bg-[#1a1210]">
         <HeroCarousel slides={heroSlides} activeIndex={activeSlide} onIndexChange={setActiveSlide} />
 
-        <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1280px] flex-col justify-end px-4 pb-36 pt-24 sm:px-8 sm:pb-40 md:px-10 lg:px-12">
+        <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1280px] flex-col justify-end px-4 pb-36 pt-20 sm:px-8 sm:pb-48 sm:pt-24 md:px-10 md:pb-40 lg:px-12">
           <div ref={contentRef} className="max-w-[720px]">
             {currentSlide?.label && (
-              <span className="mb-4 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-widest text-white backdrop-blur-sm">
+              <span className="mb-4 hidden rounded-full border border-white/25 bg-white/10 px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-widest text-white backdrop-blur-sm sm:inline-block">
                 {currentSlide.label}
               </span>
             )}
-            <p className="mb-3 font-sans text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
+            <p className="mb-3 hidden font-sans text-sm font-semibold uppercase tracking-[0.2em] text-white/80 sm:block">
               Crafted With Love · Toronto
             </p>
-            <h1 className="font-serif text-[42px] font-bold leading-[1.02] tracking-tight text-white sm:text-[56px] md:text-[64px] lg:text-[72px]">
-              Handcrafted
+            <h1 className="font-serif text-[36px] font-bold leading-[1.05] tracking-tight text-white sm:text-[56px] md:text-[64px] lg:text-[72px]">
+              Handcrafted Desserts
               <br />
-              <span className="text-[#ffb3c1]">Desserts</span>
+              <span className="text-[#ffb3c1]">in Toronto</span>
             </h1>
-            <p className="mt-5 max-w-lg font-sans text-base leading-relaxed text-white/85 sm:text-lg md:text-xl">
-              Signature tres leches, dessert cups, and celebration cakes — made fresh in Toronto.
+            <p className="mt-3 max-w-lg font-sans text-sm leading-snug text-white/85 sm:mt-5 sm:text-base sm:leading-relaxed md:text-lg lg:text-xl">
+              Tres leches cakes, dessert cups & custom orders — fresh at 140 Rogers Rd.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <button type="button" onClick={() => navigate("/special-orders")} className="rounded-[50px] bg-[#cc4156] px-8 py-4 font-sans text-lg font-bold text-white shadow-xl transition-all duration-200 hover:scale-[1.04] hover:shadow-2xl active:scale-[0.98]">
+            <div className="mt-5 flex w-full flex-col gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4">
+              <button type="button" onClick={() => navigate("/special-orders")} className="btn-cta flex w-full justify-center px-6 py-2.5 text-sm shadow-xl hover:shadow-2xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg">
                 Order Ahead
               </button>
-              <button type="button" onClick={() => navigate("/menu")} className="rounded-[50px] border-2 border-white/80 bg-white/10 px-8 py-4 font-sans text-lg font-bold text-white backdrop-blur-sm transition-all duration-200 hover:bg-white hover:text-[#6B3A2A] hover:scale-[1.04] active:scale-[0.98]">
+              <button type="button" onClick={() => navigate("/menu")} className="flex w-full justify-center rounded-[50px] border-2 border-white/80 bg-white/10 px-6 py-2.5 font-sans text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:bg-white hover:text-[#6B3A2A] hover:scale-[1.04] active:scale-[0.98] sm:w-auto sm:px-8 sm:py-4 sm:text-lg">
                 View Menu
               </button>
             </div>
-            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 font-sans text-sm text-white/75">
+            <div className="mt-3 flex w-full flex-col items-start gap-2 sm:mt-4 sm:flex-row sm:items-center sm:gap-4">
+              <UberEatsLink variant="hero" className="w-full sm:w-auto" />
+              <span className="hidden font-sans text-xs text-white/70 sm:inline sm:text-sm">
+                Delivery available
+              </span>
+            </div>
+            <div className="mt-6 hidden flex-col items-start gap-2 font-sans text-xs text-white/75 sm:flex sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5 sm:gap-y-2 sm:text-sm">
               <button type="button" onClick={() => document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth" })} className="inline-flex items-center gap-1.5 border-0 bg-transparent p-0 cursor-pointer hover:text-white">
                 <Star className="h-4 w-4 fill-[#ffb3c1] text-[#ffb3c1]" />
                 <span className="font-medium">Loved on Google</span>
@@ -103,7 +95,7 @@ export const BestSellerShowcaseSection = (): JSX.Element => {
           </div>
         </div>
 
-        <button type="button" aria-label="Scroll to explore" onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })} className="absolute bottom-28 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1 text-white/60 transition-colors hover:text-white sm:bottom-32">
+        <button type="button" aria-label="Scroll to explore" onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })} className="absolute bottom-40 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-1 text-white/60 transition-colors hover:text-white sm:bottom-44 md:bottom-32 md:flex">
           <span className="font-sans text-[10px] font-semibold uppercase tracking-widest">Explore</span>
           <ChevronDown className="h-5 w-5 animate-bounce" />
         </button>
@@ -114,7 +106,7 @@ export const BestSellerShowcaseSection = (): JSX.Element => {
       <section id="products" className="w-full bg-[#ffccd3] pb-14 pt-8">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
           <h2 className="text-center font-serif text-[36px] font-bold leading-tight text-black sm:text-[40px] lg:text-[44px]">
-            Check Out Our <span className="text-[#cc4156]">Best Sellers</span>
+            Check Out Our <span className="text-brand-pink">Best Sellers</span>
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-center font-sans text-base text-gray-600">Fresh, handmade, and impossible to resist — these are the fan favourites.</p>
           <div ref={cardsRef} className="mt-10 grid grid-cols-2 justify-items-center gap-x-6 gap-y-10 md:grid-cols-4 md:gap-x-8">
@@ -124,7 +116,7 @@ export const BestSellerShowcaseSection = (): JSX.Element => {
                   <img className="h-[220px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06] sm:h-[240px]" alt={item.title} src={item.image} />
                 </div>
                 <h3 className="font-serif text-center text-[18px] font-bold leading-snug text-[#6B3A2A] sm:text-[20px]">{item.title}</h3>
-                <p className="font-sans text-sm font-semibold text-[#cc4156]">{item.price}</p>
+                <p className="font-sans text-sm font-semibold text-brand-pink">{item.price}</p>
               </article>
             ))}
           </div>

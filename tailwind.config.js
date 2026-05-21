@@ -41,7 +41,8 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
         brand: {
-          pink: "#cc4156",
+          pink: "#DF436E",
+          "pink-hover": "#C93B63",
           "pink-light": "#ffccd3",
           "pink-bg": "#fffafa",
           brown: "#6B3A2A",
@@ -60,23 +61,8 @@ module.exports = {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
         serif: ["Playfair Display", "Georgia", "serif"],
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-      },
     },
     container: { center: true, padding: "2rem", screens: { "2xl": "1400px" } },
   },
   plugins: [],
-  darkMode: ["class"],
 };
